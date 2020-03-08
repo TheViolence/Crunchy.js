@@ -1,10 +1,10 @@
 type ValueFactory = (cookieValue?: string, validityInDays?: number) => string;
-type ErrorFactory = () => string;
+type EraseFactory = () => string;
 
 interface Cookie {
 	key: string;
 	value: ValueFactory;
-	erase: ErrorFactory;
+	erase: EraseFactory;
 }
 
 enum Action {
@@ -38,7 +38,7 @@ const Cookie = (key: string): Cookie => {
 				return cookieValue;
 		}
 	};
-	const erase: ErrorFactory = () =>
+	const erase: EraseFactory = () =>
 		document.cookie = `${key}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
 	return {
 		key,
